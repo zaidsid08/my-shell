@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: make CC=${{ matrix.cc }}
+      - name: Unit + integration tests
+        run: make test CC=${{ matrix.cc }}
+      - name: Tests under AddressSanitizer + UBSan
+        run: make debug CC=${{ matrix.cc }}
