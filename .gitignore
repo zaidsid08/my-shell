@@ -1,0 +1,7 @@
+build/
+msh
+*.o
+*.a
+.vscode/
+.idea/
+.DS_Store
